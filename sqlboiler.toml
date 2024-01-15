@@ -1,0 +1,12 @@
+output   = "models"
+no-tests = true
+wipe     = true
+add-enum-types = true
+
+[psql]
+    dbname = "sqlboiler"
+    host   = "localhost"
+    port   = 30000
+    user   = "dbadmin"
+    pass   = "admin123"
+    sslmode = "disable"
