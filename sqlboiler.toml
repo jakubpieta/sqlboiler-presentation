@@ -1,7 +1,6 @@
 output   = "models"
 no-tests = true
 wipe     = true
-add-enum-types = true
 
 [psql]
     dbname = "sqlboiler"

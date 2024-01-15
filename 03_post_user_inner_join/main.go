@@ -67,4 +67,31 @@ func main() {
 	fmt.Printf("\tTitle: %s\n", userWithPost.Post.Title)
 	fmt.Printf("\tContent: %s\n", userWithPost.Post.Content.String)
 	fmt.Printf("========================================\n")
+
+	username := "john_doe"
+	query := `
+		SELECT users.id, users.username, users.email, posts.id, posts.title, posts.content
+		FROM posts
+		INNER JOIN users ON users.id = posts.user_id
+		WHERE users.username = $1
+	`
+	rows, err := db.Query(query, username)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func(rows *sql.Rows) {
+		err := rows.Close()
+		if err != nil {
+
+		}
+	}(rows)
+
+	for rows.Next() {
+		var userID, username, email, postID, postTitle, postContent string
+		err := rows.Scan(&userID, &username, &email, &postID, &postTitle, &postContent)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("User ID: %s, Username: %s, Post ID: %s, Post Content: %s\n", userID, username, postID, postContent)
+	}
 }

@@ -17,7 +17,6 @@ func main() {
 	ctx := boil.WithDebug(context.Background(), true)
 
 	conn := util.DBConnString()
-	log.Printf(conn)
 	db, err := sql.Open("postgres", conn)
 	if err != nil {
 		log.Fatal(err)
